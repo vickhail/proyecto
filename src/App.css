@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
 :root{
     --color-fondo-claro: aliceblue;
     --color-rosa-suave: #fae8e0;
@@ -51,6 +53,7 @@ body {
 }
 
 h1 {
+  font-family: "Lilita One", sans-serif;
   margin-top: 0;
   margin-bottom: 25px;
   color: var(--color-rosa-principal);
