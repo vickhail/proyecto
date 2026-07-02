@@ -8,27 +8,37 @@ function App() {
   const [itemToEdit, setItemToEdit] = useState(null);
 
   useEffect(() => {
-    const storedItems =
-      JSON.parse(localStorage.getItem('items')) || [];
+    const storedItems = JSON.parse(localStorage.getItem('items')) || [];
+    console.log('Items cargados:', storedItems);
     setItems(storedItems);
   }, []);
 
   useEffect(() => {
+    console.log('Guardando items:', items);
     localStorage.setItem('items', JSON.stringify(items));
   }, [items]);
 
   const addOrUpdateItem = (value) => {
     if (itemToEdit) {
-      setItems(items.map(item => item.id ===
-      itemToEdit.id ? { ...item, value } : item));
+      setItems(prevItems => 
+        prevItems.map(item => 
+          item.id === itemToEdit.id ? { ...item, value } : item
+        )
+      );
       setItemToEdit(null);
     } else {
-      setItems([...items, { id: Date.now(), value }]);
+      setItems(prevItems => {
+        const newItem = { id: Date.now(), value: value.trim() };
+        console.log('Nuevo item:', newItem);
+        return [...prevItems, newItem];
+      });
     }
   };
 
   const deleteItem = (id) => {
-    setItems(items.filter(item => item.id !== id));
+    if (window.confirm('¿Estás seguro de que deseas eliminar este elemento?')) {
+      setItems(prevItems => prevItems.filter(item => item.id !== id));
+    }
   };
 
   const editItem = (item) => {
@@ -38,11 +48,16 @@ function App() {
   return (
     <div className="App">
       <h1>CRUD con LocalStorage</h1>
+      <p>Total: {items.length}</p>
       <Form
         addOrUpdateItem={addOrUpdateItem}
         itemToEdit={itemToEdit}
       />
-      <List items={items} deleteItem={deleteItem} editItem={editItem} />
+      <List 
+        items={items} 
+        deleteItem={deleteItem} 
+        editItem={editItem} 
+      />
     </div>
   );
 }
