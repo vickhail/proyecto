@@ -36,7 +36,10 @@ function Form({ addOrUpdateItem, itemToEdit }) {
             if (error) setError("");
           }}
         />
-        <button type="submit">
+        <button 
+          type="submit"
+          className={itemToEdit ? 'update-btn' : ''}
+        >
           {itemToEdit ? 'Actualizar' : 'Agregar'}
         </button>
       </form>

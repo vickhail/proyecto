@@ -16,6 +16,8 @@
     --color-rosa-hover: #d86c7d;
     --color-verde-hover: #2c5c16;
     --color-rojo-hover: #8f2c2c;
+    --color-azul-hover: #1f5a7a;
+    --color-naranjo-hover: #a55a16;
 
     /* Bordes y sombras */
     --color-borde: #cdbfc3;
@@ -41,15 +43,18 @@ body {
     var(--color-blanco),
     var(--color-rosa-principal)
   );
+  padding: 20px;
 }
 
 .App {
   background-color: var(--color-blanco);
-  margin-top: 30px;
   padding: 35px 30px;
   border-radius: 20px;
   box-shadow: 0 10px 25px var(--color-sombra);
   text-align: center;
+  max-width: 650px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 h1 {
@@ -101,6 +106,16 @@ form button:hover {
   transform: translateY(-2px);
 }
 
+form button.update-btn {
+  background-color: var(--color-naranjo);
+  color: var(--color-blanco);
+}
+
+form button.update-btn:hover {
+  background-color: var(--color-naranjo-hover);
+  transform: translateY(-2px);
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -121,23 +136,71 @@ li {
   box-shadow: 0 4px 10px var(--color-sombra-item);
 }
 
-li button:first-of-type {
-  background-color: var(--color-verde);
-  color: var(--color-blanco);
+/* Texto del ítem */
+li span {
+  flex: 1;
+  text-align: left;
+  word-break: break-word;
+}
+
+li .button-group {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
   margin-left: auto;
 }
 
-li button:first-of-type:hover {
-  background-color: var(--color-verde-hover);
+li button {
+  border: none;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  min-width: 75px;
 }
 
-li button:last-of-type {
+li .complete-btn {
+  background-color: var(--color-azul);
+  color: var(--color-blanco);
+}
+
+li .complete-btn:hover {
+  background-color: var(--color-azul-hover);
+  transform: translateY(-2px);
+}
+
+li .edit-btn {
+  background-color: var(--color-verde);
+  color: var(--color-blanco);
+}
+
+li .edit-btn:hover {
+  background-color: var(--color-verde-hover);
+  transform: translateY(-2px);
+}
+
+li .delete-btn {
   background-color: var(--color-rojo);
   color: var(--color-blanco);
 }
 
-li button:last-of-type:hover {
+li .delete-btn:hover {
   background-color: var(--color-rojo-hover);
+  transform: translateY(-2px);
+}
+
+.delete-all-btn {
+  background-color: var(--color-rojo) !important;
+  color: var(--color-blanco) !important;
+  margin-bottom: 15px;
+  padding: 8px 16px !important;
+}
+
+.delete-all-btn:hover {
+  background-color: var(--color-rojo-hover) !important;
+  transform: translateY(-2px);
 }
 
 @media (max-width: 480px) {
@@ -154,7 +217,13 @@ li button:last-of-type:hover {
     align-items: stretch;
   }
 
-  li button:first-of-type {
+  li .button-group {
+    flex-direction: column;
+    width: 100%;
     margin-left: 0;
+  }
+
+  li button {
+    width: 100%;
   }
 }
